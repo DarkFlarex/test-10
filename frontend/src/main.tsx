@@ -1,13 +1,13 @@
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import App from './App'
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 import {CssBaseline, ThemeProvider} from "@mui/material";
-import theme from "./theme.ts";
+import theme from "./theme";
+import {store} from "./app/store";
 
 createRoot(document.getElementById('root')!).render(
-    <Provider store={sotre}>
+    <Provider store={store}>
         <BrowserRouter>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
