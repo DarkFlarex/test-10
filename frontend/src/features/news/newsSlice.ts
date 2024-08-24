@@ -1,20 +1,25 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {createNews, deleteNews, fetchNews} from "./newsThunks";
+import {createNews, deleteNews, fetchNews, fetchOneNews} from "./newsThunks";
 import {News} from "../../types";
 
 
 export interface NewsState {
     items: News[];
+    news: News |null;
     itemsFetching: boolean;
     isCreating: boolean;
     deleteLoading: string | false;
+    oneFetching: boolean;
+
 }
 
 const initialState: NewsState = {
     items: [],
+    news:null,
     itemsFetching: false,
     isCreating: false,
     deleteLoading: false,
+    oneFetching: false,
 }
 
 export const newsSlice = createSlice({
@@ -53,13 +58,26 @@ export const newsSlice = createSlice({
             .addCase(deleteNews.rejected, (state) => {
                 state.deleteLoading = false;
             });
+        builder
+            .addCase(fetchOneNews.pending, (state) => {
+                state.news = null;
+                state.oneFetching = true;
+            })
+            .addCase(fetchOneNews.fulfilled, (state, { payload: news }) => {
+                state.news = news;
+                state.oneFetching = false;
+            })
+            .addCase(fetchOneNews.rejected, (state) => {
+                state.oneFetching = false;
+            });
     },
     selectors: {
         selectNews: (state) => state.items,
         selectNewsFetching: (state) => state.itemsFetching,
         selectNewsCreating: (state) => state.isCreating,
         selectDeleteNewsLoading: (state) => state.deleteLoading,
-
+        selectOneNews: (state) => state.news,
+        selectOneNewsFetching: (state) => state.oneFetching,
     },
 });
 
@@ -70,4 +88,6 @@ export const {
     selectNewsFetching,
     selectNewsCreating,
     selectDeleteNewsLoading,
+    selectOneNews,
+    selectOneNewsFetching,
 } = newsSlice.selectors;

@@ -38,10 +38,10 @@ const NewsItem:React.FC<Props> = ({
                 <CardHeader title={title} />
                 <ImageCardMedia image={cardImage} title={title} />
                 <CardContent>
-                    {dayjs(created_at).format('DD.MM.YYYY HH:mm:ss')}
+                   At {dayjs(created_at).format('DD.MM.YYYY HH:mm:ss')}
                 </CardContent>
                 <CardActions>
-                    <IconButton component={Link} to={`/products/${id}`}>
+                    <IconButton component={Link} to={`/news/${id}`}>
                         Read Full post <ArrowForwardIosIcon />
                     </IconButton>
 
