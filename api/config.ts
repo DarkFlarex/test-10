@@ -23,7 +23,7 @@ const config = {
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'test',
+    database: 'schema_news',
   }
 };
 
