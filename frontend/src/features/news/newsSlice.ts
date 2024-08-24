@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {createNews, fetchNews} from "./newsThunks";
+import {createNews, deleteNews, fetchNews} from "./newsThunks";
 import {News} from "../../types";
 
 
@@ -7,12 +7,14 @@ export interface NewsState {
     items: News[];
     itemsFetching: boolean;
     isCreating: boolean;
+    deleteLoading: string | false;
 }
 
 const initialState: NewsState = {
     items: [],
     itemsFetching: false,
     isCreating: false,
+    deleteLoading: false,
 }
 
 export const newsSlice = createSlice({
@@ -41,11 +43,23 @@ export const newsSlice = createSlice({
             .addCase(createNews.rejected, (state) => {
                 state.isCreating = false;
             });
+        builder
+            .addCase(deleteNews.pending, (state, { meta: { arg: newsId } }) => {
+                    state.deleteLoading = newsId;
+                })
+            .addCase(deleteNews.fulfilled, (state) => {
+                state.deleteLoading = false;
+            })
+            .addCase(deleteNews.rejected, (state) => {
+                state.deleteLoading = false;
+            });
     },
     selectors: {
         selectNews: (state) => state.items,
         selectNewsFetching: (state) => state.itemsFetching,
         selectNewsCreating: (state) => state.isCreating,
+        selectDeleteNewsLoading: (state) => state.deleteLoading,
+
     },
 });
 
@@ -55,4 +69,5 @@ export const {
     selectNews,
     selectNewsFetching,
     selectNewsCreating,
+    selectDeleteNewsLoading,
 } = newsSlice.selectors;

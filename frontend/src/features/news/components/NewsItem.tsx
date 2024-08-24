@@ -13,7 +13,7 @@ const ImageCardMedia = styled(CardMedia)({
 });
 
 interface Props {
-    id:number;
+    id: number;
     title: string;
     image: string | null;
     created_at: string;
@@ -21,11 +21,11 @@ interface Props {
 }
 
 const NewsItem:React.FC<Props> = ({
-    id
-    , title
-    , image
-    , created_at
-    ,onDelete
+    id,
+    title,
+    image,
+    created_at,
+    onDelete,
 }) => {
     let cardImage = imageNotFound;
 
