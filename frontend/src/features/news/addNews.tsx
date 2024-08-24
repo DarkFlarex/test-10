@@ -4,13 +4,16 @@ import {NewsMutation} from "../../types";
 import {createNews} from "./newsThunks";
 import {Grid, Typography} from "@mui/material";
 import NewsForm from "./components/NewsForm";
+import {useNavigate} from "react-router-dom";
 
 const AddNews = () => {
+    const navigate = useNavigate();
     const isCreating = useAppSelector(selectNewsCreating);
     const dispatch = useAppDispatch();
 
     const handleNewsSubmit =async (newsMutation: NewsMutation) => {
         await dispatch(createNews(newsMutation));
+        navigate('/');
     };
     return (
         <>
