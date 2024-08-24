@@ -8,14 +8,14 @@ create table news
     created_at  datetime default CURRENT_TIMESTAMP null
 );
 
-create table comment
+create table comments
 (
     id      int auto_increment
         primary key,
     news_id int          not null,
     author  varchar(255) null,
     text    text         not null,
-    constraint comment_news_id_fk
+    constraint comments_news_id_fk
         foreign key (news_id) references news (id)
 );
 

@@ -64,7 +64,7 @@ newsRouter.delete('/:id', async (req, res) => {
     const id = req.params.id;
 
     const [deleteCommentsResult] = await mysqlDB.getConnection().query(
-        'DELETE FROM comment WHERE news_id = ?',
+        'DELETE FROM comments.ts WHERE news_id = ?',
         [id]
     );
 
