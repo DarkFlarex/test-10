@@ -13,7 +13,7 @@ const AppToolbar = () => {
     return (
         <AppBar position="sticky" sx={{ mb: 2 }}>
             <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <Typography variant="h6">
                     <StyledLink to="/">News</StyledLink>
                 </Typography>
             </Toolbar>
