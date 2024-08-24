@@ -64,7 +64,7 @@ newsRouter.delete('/:id', async (req, res) => {
     const id = req.params.id;
 
     const [deleteCommentsResult] = await mysqlDB.getConnection().query(
-        'DELETE FROM comments.ts WHERE news_id = ?',
+        'DELETE FROM comments WHERE news_id = ?',
         [id]
     );
 
@@ -86,5 +86,6 @@ newsRouter.delete('/:id', async (req, res) => {
     return res.send({ message: 'news deleted' });
 
 });
+
 
 export default newsRouter;
